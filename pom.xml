@@ -119,6 +119,13 @@
 				<version>3.0.3</version>
 				<configuration>
 					<appName>wps-backend</appName>
+					<includeTarget>false</includeTarget>
+					<includes>
+						<include>target/wps-backend-1.0.0.jar</include>
+					</includes>
+					<processTypes>
+						<web>java -jar target/wps-backend-1.0.0.jar</web>
+					</processTypes>
 				</configuration>
 			</plugin>
 		</plugins>
