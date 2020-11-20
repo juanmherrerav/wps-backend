@@ -13,7 +13,7 @@ public class MongoClientConfiguration   {
 
     @Bean
     public MongoClient mongo() throws Exception {
-        final ConnectionString connectionString = new ConnectionString("mongodb://productListUser:productListPassword@localhost:27017/admin");
+        final ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017/admin");
         final MongoClientSettings mongoClientSettings = MongoClientSettings.builder().applyConnectionString(connectionString).build();
         return MongoClients.create(mongoClientSettings);
     }
