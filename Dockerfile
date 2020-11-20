@@ -67,7 +67,8 @@ COPY ./java.env /java.env
 
 # not sure why you need to `install` the package in the local repository?
 RUN mvn -T 4 clean package -Dmaven.test.skip=true
-RUN cp -a target/wps-backend-1.0.0-spring-boot.jar /opt/springboot-launcher/wps-backend-1.0.0.jar \
+RUN mkdir /opt/springboot-launcher
+RUN cp -a /target/wps-backend-1.0.0-spring-boot.jar /opt/springboot-launcher/wps-backend-1.0.0.jar \
     && rm -rf "$HOME/.m2"
 
 VOLUME /tmp
