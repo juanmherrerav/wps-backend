@@ -57,8 +57,8 @@ ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 ENV MONGO_SERVER=localhost
 #ENV MONGO_PORT=27017
 ENV MONGO_DATABASE=promotions
-ENV MONGO_INITDB_ROOT_USERNAME=productListUser
-ENV MONGO_INITDB_ROOT_PASSWORD=productListPassword
+#ENV MONGO_INITDB_ROOT_USERNAME=productListUser
+#ENV MONGO_INITDB_ROOT_PASSWORD=productListPassword
 
 COPY ./database/products.json  /database/products.json
 COPY ./entrypoint/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
