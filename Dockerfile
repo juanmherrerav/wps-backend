@@ -70,7 +70,7 @@ RUN cp -a target/wps-backend-1.0.0-spring-boot.jar /target/wps-backend-1.0.0.jar
     && rm -rf "$HOME/.m2"
 
 VOLUME /tmp
-#COPY target/wps-backend-1.0.0.jar /target/wps-backend-1.0.0.jar
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
