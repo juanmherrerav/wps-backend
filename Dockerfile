@@ -62,6 +62,7 @@ ENV MONGO_DATABASE=promotions
 
 COPY ./database/products.json  /database/products.json
 COPY ./entrypoint/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
+COPY ./java.env /java.env
 
 
 # not sure why you need to `install` the package in the local repository?
