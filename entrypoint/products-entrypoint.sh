@@ -13,7 +13,7 @@ echo $(ls /database)
 
 echo "Importing sample datasets into $server"
 
-mongoimport --host localhost --db promotions --collection products --file /database/products.json --jsonArray -vvvvv
+mongoimport --host localhost --db promotions --collection products --file /database/products.json --jsonArray -v
 
 #cat mongoimportoutput.txt
 #    mongoimport --host ${HOST} --username productListUser --password productListPassword --authenticationDatabase admin --db promotions --collection ${COLLECTION} --mode upsert --file ${AFILE}
