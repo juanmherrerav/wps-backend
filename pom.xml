@@ -64,17 +64,16 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.19</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>2.5</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.apache.logging.log4j</groupId>-->
+<!--			<artifactId>log4j-slf4j-impl</artifactId>-->
+<!--			<version>2.5</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>net.logstash.logback</groupId>
 			<artifactId>logstash-logback-encoder</artifactId>
 			<version>6.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -85,22 +84,22 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.7.0</version>
-			<scope>test</scope>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.junit.jupiter</groupId>-->
+<!--			<artifactId>junit-jupiter-engine</artifactId>-->
+<!--			<version>5.7.0</version>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework</groupId>-->
+<!--			<artifactId>spring-test</artifactId>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>
@@ -108,26 +107,29 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<goals>
+					<goal>repackage</goal>
+				</goals>
 				<configuration>
-					<fork>true</fork>
+					<classifier>spring-boot</classifier>
 					<mainClass>com.walmart.product.search.ProductSearchApplication</mainClass>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>com.heroku.sdk</groupId>
-				<artifactId>heroku-maven-plugin</artifactId>
-				<version>3.0.3</version>
-				<configuration>
-					<appName>wps-backend</appName>
-					<includeTarget>false</includeTarget>
-					<includes>
-						<include>target/wps-backend-1.0.0.jar</include>
-					</includes>
-					<processTypes>
-						<web>java -jar target/wps-backend-1.0.0.jar</web>
-					</processTypes>
-				</configuration>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>com.heroku.sdk</groupId>-->
+<!--				<artifactId>heroku-maven-plugin</artifactId>-->
+<!--				<version>3.0.3</version>-->
+<!--				<configuration>-->
+<!--					<appName>wps-backend</appName>-->
+<!--					<includeTarget>false</includeTarget>-->
+<!--					<includes>-->
+<!--						<include>target/wps-backend-1.0.0.jar</include>-->
+<!--					</includes>-->
+<!--					<processTypes>-->
+<!--						<web>java -jar target/wps-backend-1.0.0.jar</web>-->
+<!--					</processTypes>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 </project>

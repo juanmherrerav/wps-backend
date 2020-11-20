@@ -29,12 +29,30 @@ RUN apt-get update && \
 RUN apt-get -y install supervisor
 RUN mkdir -p /var/log/supervisor
 
-
 # Start the supervisor instance when the machine autostarts
 RUN echo "supervisord -c /etc/supervisord.conf" >> /root/.bashrc
 
 # Copy config file for Supervisor (Custom supervisord.conf)
 COPY supervisord.conf /etc/supervisord.conf
+
+
+RUN ls *
+
+ARG MAVEN_VERSION=3.6.1
+ARG USER_HOME_DIR="/root"
+ARG BASE_URL=https://archive.apache.org/dist/maven/maven-3/${MAVEN_VERSION}/binaries
+
+COPY ./pom.xml ./pom.xml
+COPY ./src/main ./src/main
+
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+ && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+ && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+ && rm -f /tmp/apache-maven.tar.gz \
+ && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+
+ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
 
 ENV MONGO_SERVER=localhost
 #ENV MONGO_PORT=27017
@@ -45,8 +63,14 @@ ENV MONGO_INITDB_ROOT_PASSWORD=productListPassword
 COPY ./database/products.json  /database/products.json
 COPY ./entrypoint/products-entrypoint.sh /docker-entrypoint-initdb.d/products-entrypoint.sh
 
+
+# not sure why you need to `install` the package in the local repository?
+RUN mvn -T 4 clean package -Dmaven.test.skip=true
+RUN cp -a target/wps-backend-1.0.0-spring-boot.jar /target/wps-backend-1.0.0.jar \
+    && rm -rf "$HOME/.m2"
+
 VOLUME /tmp
-COPY target/wps-backend-1.0.0.jar /target/wps-backend-1.0.0.jar
+#COPY target/wps-backend-1.0.0.jar /target/wps-backend-1.0.0.jar
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
